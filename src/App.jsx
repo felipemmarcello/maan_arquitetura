@@ -10,9 +10,9 @@ import Contato from './pages/Contact.jsx';
 export default function App() {
   return (
     <Router>
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
         <Navbar />
-        <div style={{ flex: 1, padding: '5rem 1rem 1rem 1rem' }}>
+        <div style={{ flex: 1 }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/sobre" element={<Sobre />} />

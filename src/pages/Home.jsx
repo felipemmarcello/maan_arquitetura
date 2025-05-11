@@ -1,3 +1,5 @@
+import Teste from '../images/teste.jpg'
+
 export default function Home() {
-  return <h1>Página Principal - Bem-vindo!</h1>;
+  return <img src={Teste} style={{height: '100%', width: '100%'}}/>;
 }
