@@ -1,8 +1,8 @@
 import { Sidebar } from 'primereact/sidebar';
-import { Button } from 'primereact/button';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Divider } from 'primereact/divider';
+import Menu from '../images/menu.png'
 
 export default function Navbar() {
   const [visible, setVisible] = useState(false);
@@ -25,41 +25,85 @@ export default function Navbar() {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: '0.5rem 1rem'
+        padding: '1rem 2rem'
       }}>
         <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-          <i className="pi pi-globe" style={{ marginRight: '0.5rem' }}></i>
-          Minha Empresa
+          maann | arquitetura e paisagismo
         </div>
 
-        <Button
-          icon="pi pi-bars"
-          className="p-button-text p-button-plain"
+        <span
           onClick={() => setVisible(true)}
-          aria-label="Abrir menu"
-        />
+          style={{
+            cursor: 'pointer',
+            fontSize: '2rem',
+            color: '#595959',
+            fontWeight: '500',
+            transition: 'color 0.3s ease',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = '#d4a373')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = '#595959')}
+        >
+          <img src={Menu} style={{height: '23px', width: '23px'}}/>
+        </span>
+
       </div>
 
       {/* Sidebar do lado direito */}
-      <Sidebar
-        visible={visible}
-        position="right"
-        onHide={() => setVisible(false)}
-        showCloseIcon
-        dismissable
-        className="p-sidebar-sm"
-        style={{ width: '13rem', transition: 'transform 0.3s ease-in-out' }}
-      >
-        <h2 className="p-mb-3">Navegação</h2>
-        <Divider />
-        <div className="p-d-flex p-flex-column" style={{ gap: '1rem' }}>
-          <Button label="Menu" icon="pi pi-home" className="p-button-outlined p-button-secondary" style={{border: 'none', boxShadow: 'none', marginBottom: '1rem'}} onClick={() => navigateTo('/')} />
-          <Button label="Sobre" icon="pi pi-info-circle" className="p-button-outlined p-button-secondary" style={{border: 'none', boxShadow: 'none', marginBottom: '1rem'}} onClick={() => navigateTo('/sobre')} />
-          <Button label="Projetos" icon="pi pi-briefcase" className="p-button-outlined p-button-secondary" style={{border: 'none', boxShadow: 'none', marginBottom: '1rem'}} onClick={() => navigateTo('/projetos')} />
-          <Button label="Equipe" icon="pi pi-users" className="p-button-outlined p-button-secondary" style={{border: 'none', boxShadow: 'none', marginBottom: '1rem'}} onClick={() => navigateTo('/equipe')} />
-          <Button label="Contato" icon="pi pi-envelope" className="p-button-outlined p-button-secondary" style={{border: 'none', boxShadow: 'none'}} onClick={() => navigateTo('/contato')} />
-        </div>
-      </Sidebar>
+      <div className="card flex justify-content-center">
+        <Sidebar
+          visible={visible}
+          position="right"
+          onHide={() => setVisible(false)}
+          style={{ width: '14rem', transition: 'transform 0.3s ease-in-out' }}
+        >
+          <h1 style={{color:'#393d3f'}}>Navegação</h1>
+
+          <Divider />
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', marginTop: '1rem' }}>
+            {[
+              { label: 'Sobre', path: '/sobre' },
+              { label: 'Projetos', path: '/projetos' },
+              { label: 'Equipe', path: '/equipe' },
+              { label: 'Contato', path: '/contato' },
+            ].map((item, index) => (
+              <span
+                key={index}
+                onClick={() => navigateTo(item.path)}
+                style={{
+                  position: 'relative',
+                  cursor: 'pointer',
+                  fontSize: '1.2rem',
+                  color: '#595959',
+                  fontWeight: '500',
+                  transition: 'color 0.3s ease-in-out',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#d4a373';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '#595959';
+                }}
+              >
+                {item.label}
+                <span
+                  style={{
+                    position: 'absolute',
+                    bottom: -4,
+                    left: 0,
+                    height: '2px',
+                    width: '0%',
+                    backgroundColor: 'var(--primary-400)',
+                    transition: 'width 0.3s ease-in-out',
+                  }}
+                  className="underline-hover"
+                />
+              </span>
+            ))}
+          </div>
+
+        </Sidebar>
+      </div>
     </>
   );
 }
