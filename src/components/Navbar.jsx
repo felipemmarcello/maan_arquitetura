@@ -1,8 +1,8 @@
-import { Sidebar } from 'primereact/sidebar';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { Divider } from 'primereact/divider';
-import Menu from '../images/menu.png'
+import { Sidebar } from "primereact/sidebar";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Divider } from "primereact/divider";
+import Menu from "../images/menu.png";
 
 export default function Navbar() {
   const [visible, setVisible] = useState(false);
@@ -16,48 +16,47 @@ export default function Navbar() {
   return (
     <>
       {/* Top navbar com logo à esquerda e menu à direita */}
-      <div className="p-shadow-2" style={{
-        position: 'fixed',
-        top: 0,
-        width: '100%',
-        backgroundColor: 'var(--surface-0)',
-        zIndex: 1000,
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '1rem 2rem'
-      }}>
+      <div
+        className="p-shadow-2"
+        style={{
+          position: "fixed",
+          top: 0,
+          width: "100%",
+          backgroundColor: "var(--surface-0)",
+          zIndex: 1000,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "1rem 2rem",
+        }}
+      >
         <span
-          onClick={() => navigateTo('/')}
+          onClick={() => navigateTo("/")}
           style={{
-            fontWeight: 'bold',
-            fontSize: '1.2rem',
-            cursor: 'pointer',
-            color: '#393d3f',
-            transition: 'color 0.3s ease-in-out',
+            fontWeight: "bold",
+            fontSize: "1.2rem",
+            cursor: "pointer",
+            color: "#000000",
+            transition: "color 0.3s ease-in-out",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = '#d4a373')}
-          onMouseLeave={(e) => (e.currentTarget.style.color = '#393d3f')}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "#6b5b47")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "#000000")}
         >
-          maann | arquitetura e paisagismo
+          maann | arquitetura
         </span>
-
 
         <span
           onClick={() => setVisible(true)}
           style={{
-            cursor: 'pointer',
-            fontSize: '2rem',
-            color: '#595959',
-            fontWeight: '500',
-            transition: 'color 0.3s ease',
+            cursor: "pointer",
+            fontSize: "2rem",
+            color: "#000000",
+            fontWeight: "500",
+            transition: "color 0.3s ease",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = '#d4a373')}
-          onMouseLeave={(e) => (e.currentTarget.style.color = '#595959')}
         >
-          <img src={Menu} style={{height: '23px', width: '23px'}}/>
+          <img src={Menu} style={{ height: "23px", width: "23px" }} />
         </span>
-
       </div>
 
       {/* Sidebar do lado direito */}
@@ -66,13 +65,32 @@ export default function Navbar() {
           visible={visible}
           position="right"
           onHide={() => setVisible(false)}
-          style={{ width: '14rem', transition: 'transform 0.3s ease-in-out' }}
+          style={{
+            width: '14rem',
+            padding: '2rem 1rem',
+            backgroundColor: '#e8e4d8',
+            clipPath: 'polygon(-458px 0px, 100% 0px, 100% 65%)',
+            transition: 'transform 0.3s ease-in-out',
+            overflow: 'hidden'
+          }}
         >
-          <h1 style={{color:'#393d3f'}}>Navegação</h1>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '-1.5rem', marginTop: '-0.8rem' }}>
+            <p style={{ color: '#000000', fontSize: '1.7rem' }}>Navegação</p>
+          </div>
 
-          <Divider />
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '-1.7rem'}}>
+            <p style={{color: '#000000'}}>______________________</p>
+          </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', marginTop: '1rem' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '1.5rem',
+              marginTop: '3rem',
+            }}
+          >
             {[
               { label: 'Sobre', path: '/sobre' },
               { label: 'Projetos', path: '/projetos' },
@@ -85,36 +103,24 @@ export default function Navbar() {
                 style={{
                   position: 'relative',
                   cursor: 'pointer',
-                  fontSize: '1.2rem',
-                  color: '#595959',
+                  fontSize: '1.4rem',
+                  color: '#000000',
                   fontWeight: '500',
                   transition: 'color 0.3s ease-in-out',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = '#d4a373';
+                  e.currentTarget.style.color = '#6b5b47';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = '#595959';
+                  e.currentTarget.style.color = '#000000';
                 }}
               >
                 {item.label}
-                <span
-                  style={{
-                    position: 'absolute',
-                    bottom: -4,
-                    left: 0,
-                    height: '2px',
-                    width: '0%',
-                    backgroundColor: 'var(--primary-400)',
-                    transition: 'width 0.3s ease-in-out',
-                  }}
-                  className="underline-hover"
-                />
               </span>
             ))}
           </div>
-
         </Sidebar>
+
       </div>
     </>
   );
