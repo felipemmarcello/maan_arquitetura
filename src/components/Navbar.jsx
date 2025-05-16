@@ -27,9 +27,21 @@ export default function Navbar() {
         alignItems: 'center',
         padding: '1rem 2rem'
       }}>
-        <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+        <span
+          onClick={() => navigateTo('/')}
+          style={{
+            fontWeight: 'bold',
+            fontSize: '1.2rem',
+            cursor: 'pointer',
+            color: '#393d3f',
+            transition: 'color 0.3s ease-in-out',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = '#d4a373')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = '#393d3f')}
+        >
           maann | arquitetura e paisagismo
-        </div>
+        </span>
+
 
         <span
           onClick={() => setVisible(true)}
