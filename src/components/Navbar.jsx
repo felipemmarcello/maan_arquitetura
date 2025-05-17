@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Divider } from "primereact/divider";
 import Menu from "../images/menu.png";
+import Maann from '../images/maann.png'
 
 export default function Navbar() {
   const [visible, setVisible] = useState(false);
@@ -31,18 +32,13 @@ export default function Navbar() {
         }}
       >
         <span
-          onClick={() => navigateTo("/")}
+          onClick={() => navigateTo('/')}
           style={{
-            fontWeight: "bold",
-            fontSize: "1.2rem",
-            cursor: "pointer",
-            color: "#000000",
-            transition: "color 0.3s ease-in-out",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#6b5b47")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "#000000")}
-        >
-          maann | arquitetura
+            position: 'relative',
+            cursor: 'pointer',
+            overflow: 'hidden'
+          }}>
+          <img src={Maann} style={{ height: "42px"}}/>
         </span>
 
         <span
@@ -92,10 +88,10 @@ export default function Navbar() {
             }}
           >
             {[
-              { label: 'Sobre', path: '/sobre' },
-              { label: 'Projetos', path: '/projetos' },
-              { label: 'Equipe', path: '/equipe' },
-              { label: 'Contato', path: '/contato' },
+              { label: 'SOBRE', path: '/sobre' },
+              { label: 'PROJETOS', path: '/projetos' },
+              { label: 'EQUIPE', path: '/equipe' },
+              { label: 'CONTATO', path: '/contato' },
             ].map((item, index) => (
               <span
                 key={index}
@@ -103,7 +99,7 @@ export default function Navbar() {
                 style={{
                   position: 'relative',
                   cursor: 'pointer',
-                  fontSize: '1.4rem',
+                  fontSize: '1rem',
                   color: '#000000',
                   fontWeight: '500',
                   transition: 'color 0.3s ease-in-out',
