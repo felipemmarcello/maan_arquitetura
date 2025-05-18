@@ -64,7 +64,7 @@ export default function Navbar() {
           }}
         >
           <div>
-            <img src={Maann} style={{ marginTop: "5px", height: "41px" }} />
+            <img src={Maann} style={{ marginTop: "5px", height: "35px" }} />
           </div>
         </span>
 
@@ -126,7 +126,7 @@ export default function Navbar() {
               flexDirection: "column",
               alignItems: "center",
               gap: "1.5rem",
-              marginTop: "3rem",
+              marginTop: "3.2rem",
             }}
           >
             {[

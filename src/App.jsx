@@ -6,6 +6,7 @@ import Sobre from './pages/About/About.jsx';
 import Projetos from './pages/Projects/Projects.jsx';
 import Equipe from './pages/Team/Team.jsx';
 import Contato from './pages/Contact/Contact.jsx';
+import ProjectDetail from './pages/Projects/ProjectDetail/ProjectDetail.jsx'
 import './App.css';
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/sobre" element={<Sobre />} />
             <Route path="/projetos" element={<Projetos />} />
+            <Route path="/projetos/:categoria/:slug" element={<ProjectDetail />} />
             <Route path="/equipe" element={<Equipe />} />
             <Route path="/contato" element={<Contato />} />
           </Routes>

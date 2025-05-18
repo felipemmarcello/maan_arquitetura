@@ -1,76 +1,113 @@
 import { useState } from "react";
 import { Card } from "primereact/card";
-import { CSSTransition } from "primereact/csstransition";
-import "primereact/resources/themes/lara-light-indigo/theme.css";
-import "primereact/resources/primereact.min.css";
-import "./Projects.css"; // Crie esse arquivo para adicionar animações e estilos próprios
+import { useNavigate } from "react-router-dom";
+import "./Projects.css";
+
 import Arquitetura from "../../images/arquitetura.jpg";
 import Paisagismo from "../../images/paisagismo.jpg";
 import Interiores from "../../images/interiores.jpeg";
 
+const slugify = (text) =>
+  text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
+
 export default function Projects() {
-  const [selected, setSelected] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const navigate = useNavigate();
 
   const contentMap = {
-    arquitetura:
-      "Conteúdo sobre Arquitetura: projetos, conceitos e inspirações.",
-    paisagismo:
-      "Conteúdo sobre Paisagismo: integração com a natureza e design externo.",
-    interiores:
-      "Conteúdo sobre Interiores: design, funcionalidade e estética de ambientes.",
+    arquitetura: {
+      title: "Arquitetura",
+      projects: [
+        {
+          title: "Casa Moderna",
+          description: "Residência moderna com conceito aberto e linhas retas.",
+          image: Arquitetura,
+        },
+        {
+          title: "Edifício Espelhado",
+          description: "Prédio comercial com fachada espelhada e design arrojado.",
+          image: Arquitetura,
+        },
+      ],
+    },
+    paisagismo: {
+      title: "Paisagismo",
+      projects: [
+        {
+          title: "Jardim Tropical",
+          description: "Espaço com vegetação nativa e integração com a natureza.",
+          image: Paisagismo,
+        },
+      ],
+    },
+    interiores: {
+      title: "Interiores",
+      projects: [
+        {
+          title: "Loft Minimalista",
+          description: "Ambiente com decoração clean e funcional.",
+          image: Interiores,
+        },
+      ],
+    },
   };
 
-  const handleClick = (type) => {
-    setSelected(type);
-  };
-
-  return (
-    <div className="projects-container">
-      {!selected ? (
+  if (!selectedCategory) {
+    return (
+      <div className="projects-container">
         <div className="card-container">
-          {[
-            { label: "Arquitetura", key: "arquitetura", img: Arquitetura },
-            { label: "Paisagismo", key: "paisagismo", img: Paisagismo },
-            { label: "Interiores", key: "interiores", img: Interiores },
-          ].map((item) => (
+          {Object.entries(contentMap).map(([key, value]) => (
             <Card
-              key={item.key}
+              key={key}
               className="project-card"
-              onClick={() => handleClick(item.key)}
+              onClick={() => setSelectedCategory(key)}
               style={{ cursor: "pointer", padding: 0, overflow: "hidden" }}
             >
               <div className="card-content-wrapper">
-                <div className="image-title-above" style={{marginBottom: '0.5rem'}}>{item.label}</div>
+                <div className="image-title-above" style={{marginBottom: '0.5rem', fontSize: '1rem'}}>{value.title}</div>
                 <div className="image-wrapper">
-                  <img
-                    src={item.img}
-                    alt={item.label}
-                    className="project-image"
-                  />
+                  <img src={value.projects[0].image} alt={value.title} className="project-image" />
                 </div>
               </div>
             </Card>
           ))}
         </div>
-      ) : (
-        <CSSTransition
-          in={!!selected}
-          timeout={300}
-          classNames="fade"
-          unmountOnExit
-        >
-          <div className="selected-content">
-            <button
-              onClick={() => setSelected(null)}
-              className="p-button p-button-text"
-            >
-              Voltar
-            </button>
-            <h2>{selected.charAt(0).toUpperCase() + selected.slice(1)}</h2>
-            <p>{contentMap[selected]}</p>
-          </div>
-        </CSSTransition>
-      )}
+      </div>
+    );
+  }
+
+  const { title, projects } = contentMap[selectedCategory];
+
+  return (
+    <div className="projects-container">
+      <button
+        onClick={() => setSelectedCategory(null)}
+        className="p-button p-button-text"
+      >
+        Voltar
+      </button>
+      <h2>{title}</h2>
+      <div className="project-list">
+        {projects.map((proj) => (
+          <Card
+            key={proj.title}
+            className="project-card-detail"
+            onClick={() => navigate(`/projetos/${selectedCategory}/${slugify(proj.title)}`)}
+            style={{ cursor: "pointer" }}
+          >
+            <img
+              src={proj.image}
+              alt={proj.title}
+              className="project-image"
+              style={{ height: "12rem", objectFit: "cover" }}
+            />
+            <div style={{ padding: "0.8rem" }}>
+              <h3>{proj.title}</h3>
+              <p>{proj.description}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }
